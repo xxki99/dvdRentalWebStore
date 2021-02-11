@@ -1,34 +1,24 @@
 const React = require("react")
 const ReactDOM = require("react-dom")
-import {useState, useEffect} from "react"
+import { useState, useEffect } from "react"
+import Actor from "./actors" 
 
-function App(){
-    const defaultActorsData = [
-        {first_name: "", last_name: "", }
-    ]
-    const [actorsData, setActorsData] = useState(defaultActorsData)
-    useEffect(() => {
-        fetch("api/actorEntities", {
-            method: "GET", 
-        })
-            .then((response) => {
-                if (response.ok){
-                    response.json()
-                        .then((data) => {
-                            setActorsData(data)
-                        })
-                }
-            })
-    }, [])
 
+
+// import bootstrap
+
+
+
+
+
+function App() {
+
+    // render
     return (
         <div>
-            Hello World!
+            <Actor />
         </div>
     )
 }
 
-ReactDOM.render(
-	<App />,
-	document.getElementById('react')
-)
+ReactDOM.render(<App />, document.getElementById("react"))

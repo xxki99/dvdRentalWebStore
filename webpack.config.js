@@ -2,7 +2,7 @@ var path = require('path');
 
 module.exports = {
     entry: './src/main/js/app.js',
-    devtool: 'sourcemaps',
+    devtool: 'source-map',
     cache: true,
     mode: 'development',
     output: {
@@ -14,12 +14,13 @@ module.exports = {
             {
                 test: path.join(__dirname, '.'),
                 exclude: /(node_modules)/,
-                use: [{
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ["@babel/preset-env", "@babel/preset-react"]
-                    }
-                }]
+                
+                loader: 'babel-loader',
+                options: {
+                    presets: ["@babel/preset-env", "@babel/preset-react"], 
+                    plugins: ['@babel/transform-runtime']
+                }
+
             }
         ]
     }
