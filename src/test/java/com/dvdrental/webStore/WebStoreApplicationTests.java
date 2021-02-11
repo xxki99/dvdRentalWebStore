@@ -1,10 +1,10 @@
-package com.dvdStore.web.dvdRentalWeb;
+package com.dvdrental.webStore;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DvdRentalWebApplicationTests {
+class WebStoreApplicationTests {
 
 	@Test
 	void contextLoads() {

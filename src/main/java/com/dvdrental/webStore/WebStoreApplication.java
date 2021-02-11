@@ -1,13 +1,13 @@
-package com.dvdStore.web.dvdRentalWeb;
+package com.dvdrental.webStore;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DvdRentalWebApplication {
+public class WebStoreApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DvdRentalWebApplication.class, args);
+		SpringApplication.run(WebStoreApplication.class, args);
 	}
 
 }
