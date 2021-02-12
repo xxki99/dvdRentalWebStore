@@ -371,16 +371,20 @@ function _nav() {
             return _context2.finish(30);
 
           case 33:
-            ;
-            console.log(tmpUrl);
-            _context2.next = 37;
+            ; // console.log(tmpUrl)
+
+            _context2.next = 36;
             return fetchData(tmpUrl);
 
-          case 37:
+          case 36:
             returnValue = _context2.sent;
-            return _context2.abrupt("return", returnValue);
+            return _context2.abrupt("return", {
+              data: returnValue["_embedded"][searchPatten[searchPatten.length - 1]],
+              page: returnValue["page"],
+              links: returnValue["_links"]
+            });
 
-          case 39:
+          case 38:
           case "end":
             return _context2.stop();
         }
@@ -405,18 +409,158 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "getAllActors": () => (/* binding */ getAllActors)
 /* harmony export */ });
-/* harmony import */ var _hal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./hal */ "./src/main/js/DVDRentalStoreAPI/hal.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _hal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./hal */ "./src/main/js/DVDRentalStoreAPI/hal.js");
+
+
 
 var root = "/api";
 
-function getAllActors(size) {
-  (0,_hal__WEBPACK_IMPORTED_MODULE_0__.nav)(root, ["actors"], {
-    size: size
-  }).then(function (data) {
-    console.log(data);
-  })["catch"](function (error) {
-    console.log(error);
-  });
+function getAllActors(_x, _x2) {
+  return _getAllActors.apply(this, arguments);
+}
+
+function _getAllActors() {
+  _getAllActors = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(size, page) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return (0,_hal__WEBPACK_IMPORTED_MODULE_2__.nav)(root, ["actors"], {
+              size: size,
+              page: page
+            });
+
+          case 2:
+            return _context.abrupt("return", _context.sent);
+
+          case 3:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+  return _getAllActors.apply(this, arguments);
+}
+
+
+
+/***/ }),
+
+/***/ "./src/main/js/Page.js":
+/*!*****************************!*\
+  !*** ./src/main/js/Page.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Page": () => (/* binding */ Page)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+
+function Page(_ref) {
+  var ItemComponent = _ref.ItemComponent,
+      fetchFunction = _ref.fetchFunction,
+      handleErrorFunction = _ref.handleErrorFunction,
+      _ref$nPage = _ref.nPage,
+      nPage = _ref$nPage === void 0 ? 3 : _ref$nPage;
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState, 2),
+      itemsData = _useState2[0],
+      setItemsData = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({}),
+      _useState4 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState3, 2),
+      pageData = _useState4[0],
+      setPageData = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({}),
+      _useState6 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState5, 2),
+      linkData = _useState6[0],
+      setLinkData = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(20),
+      _useState8 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState7, 2),
+      size = _useState8[0],
+      setSize = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(1),
+      _useState10 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState9, 2),
+      page = _useState10[0],
+      setPage = _useState10[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    fetchFunction(size, page).then(function (data) {
+      setItemsData(data["data"]);
+      setPageData(data["page"]);
+      setLinkData(data["links"]);
+    })["catch"](function (error) {
+      handleErrorFunction(error);
+    });
+  }, [size, page]);
+
+  var handleChangePage = function handleChangePage(e) {
+    console.log("change page");
+    setPage(e.target.value);
+  };
+
+  var itemList = function itemList(items) {
+    var list = items.map(function (item, index) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "col-3",
+        key: index
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(ItemComponent, {
+        item: item
+      }));
+    });
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, list);
+  };
+
+  var pageBar = function pageBar() {
+    var lowerPage = pageData["number"] - nPage;
+    var startPage = lowerPage >= 1 ? lowerPage : 1;
+    var upperPage = pageData["number"] + nPage;
+    var endPage = upperPage <= pageData["totalPages"] ? upperPage : pageData["totalPages"];
+    var pageButtons = Array.from({
+      length: endPage - startPage + 1
+    }, function (_, i) {
+      return startPage + i;
+    }).map(function (p, index) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("li", {
+        className: "nav-item"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", {
+        className: "btn btn-outline-light",
+        value: p,
+        key: index,
+        onClick: handleChangePage
+      }, p));
+    });
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("nav", {
+      className: "navbar navbar-expand-lg navbar-dark bg-dark"
+    }, pageButtons));
+  }; // render
+
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+    className: "container",
+    style: {
+      width: "100%"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+    className: "row"
+  }, itemList(itemsData))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, pageBar()));
 }
 
 
@@ -434,39 +578,48 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _DVDRentalStoreAPI_storeAPI__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DVDRentalStoreAPI/storeAPI */ "./src/main/js/DVDRentalStoreAPI/storeAPI.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _DVDRentalStoreAPI_storeAPI__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DVDRentalStoreAPI/storeAPI */ "./src/main/js/DVDRentalStoreAPI/storeAPI.js");
+/* harmony import */ var _Page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Page */ "./src/main/js/Page.js");
 
 
 
 var root = "/api";
 
-function ActorItem(actorInfo) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, "actorItem");
+function ActorItem(_ref) {
+  var item = _ref.item;
+  var actorName = "".concat(item["firstName"], " ").concat(item["lastName"]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card mb-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+    className: "actor-image",
+    src: "#",
+    alt: "actor image"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", {
+    className: "card-title"
+  }, actorName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+    className: "card-text"
+  }, "Actor Info here"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    href: "#",
+    className: "btn btn-primary"
+  }, "Go somewhere")));
 }
 
-function Actor() {
-  var defaultActorsData = [];
+function ActorsPage() {
+  var handleError = function handleError(error) {
+    console.log(error);
+  };
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(defaultActorsData),
-      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState, 2),
-      actorsData = _useState2[0],
-      setActorsData = _useState2[1];
-
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(1),
-      _useState4 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState3, 2),
-      page = _useState4[0],
-      setPage = _useState4[1];
-
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    (0,_DVDRentalStoreAPI_storeAPI__WEBPACK_IMPORTED_MODULE_2__.getAllActors)(5);
-  }, [page]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, "Actor");
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Page__WEBPACK_IMPORTED_MODULE_2__.Page, {
+    ItemComponent: ActorItem,
+    fetchFunction: _DVDRentalStoreAPI_storeAPI__WEBPACK_IMPORTED_MODULE_1__.getAllActors,
+    handleErrorFunction: handleError
+  });
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Actor);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ActorsPage);
 
 /***/ }),
 
