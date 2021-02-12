@@ -1,7 +1,7 @@
 const React = require("react")
 const ReactDOM = require("react-dom")
 import { useState, useEffect } from "react"
-import Actor from "./actors" 
+import ActorsPage from "./actors"
 
 
 
@@ -16,7 +16,7 @@ function App() {
     // render
     return (
         <div>
-            <Actor />
+            <ActorsPage />
         </div>
     )
 }
