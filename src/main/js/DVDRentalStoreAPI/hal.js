@@ -49,9 +49,13 @@ async function nav(url, searchPatten, qs=undefined){
         }
     };
 
-    console.log(tmpUrl)
+    // console.log(tmpUrl)
     const returnValue = await fetchData(tmpUrl)
-    return returnValue
+    return {
+            data: returnValue["_embedded"][searchPatten[searchPatten.length - 1]], 
+            page: returnValue["page"], 
+            links: returnValue["_links"]
+        }
     
 
 }
