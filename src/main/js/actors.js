@@ -1,30 +1,32 @@
 import React, { useState, useEffect } from "react"
 import {getAllActors} from "./DVDRentalStoreAPI/storeAPI"
+import {Page} from "./Page"
 
 const root = "/api"
 
-function ActorItem(actorInfo) {
-    return <div>actorItem</div>
-}
-
-function Actor() {
-    const defaultActorsData = []
-    const [actorsData, setActorsData] = useState(defaultActorsData)
-
-    const [page, setPage] = useState(1)
-    useEffect(() => {
-        
-        getAllActors(5)
-            
-            
-        
-    }, [page])
-
+function ActorItem({item}) {
+    const actorName = `${item["firstName"]} ${item["lastName"]}`
     return (
-        <div>
-            Actor
+        <div className="card mb-3">
+            <img className="actor-image" src="#" alt="actor image" />
+            <div className="card-body">
+                <h5 className="card-title">{actorName}</h5>
+                <p className="card-text">Actor Info here</p>
+                <a href="#" className="btn btn-primary">Go somewhere</a>
+            </div>
         </div>
     )
 }
 
-export default Actor
+function ActorsPage(){
+
+    const handleError = (error) => {
+        console.log(error)
+    }
+
+    return (
+        <Page ItemComponent={ActorItem} fetchFunction={getAllActors} handleErrorFunction={handleError} />
+    )
+}
+
+export default ActorsPage
