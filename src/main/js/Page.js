@@ -4,25 +4,27 @@ function Page({
     ItemComponent,
     fetchFunction,
     handleErrorFunction,
-    nPage = 3,
+    nPage = 2,
 }) {
     const [itemsData, setItemsData] = useState([])
     const [pageData, setPageData] = useState({})
     const [linkData, setLinkData] = useState({})
 
-    const [size, setSize] = useState(20)
-    const [page, setPage] = useState(1)
+    const [size, setSize] = useState(10)
+    const [page, setPage] = useState(0)
     useEffect(() => {
-        fetchFunction(size, page)
-            .then((data) => {
-                setItemsData(data["data"])
-                setPageData(data["page"])
-                setLinkData(data["links"])
-            })
-            .catch((error) => {
-                handleErrorFunction(error)
-            })
+        fetchIPageData()
     }, [size, page])
+
+    
+
+    const fetchIPageData = () => {
+        fetchFunction(size, page).then((data) => {
+            setItemsData(data["data"])
+            setPageData(data["page"])
+            setLinkData(data["links"])
+        })
+    }
 
     const handleChangePage = (e) => {
         console.log("change page")
@@ -42,17 +44,20 @@ function Page({
 
     const pageBar = () => {
         const lowerPage = pageData["number"] - nPage
-        const startPage = lowerPage >= 1 ? lowerPage : 1
+        const startPage = lowerPage >= 0 ? lowerPage : 0
         const upperPage = pageData["number"] + nPage
+        const lastPage = pageData["totalPages"]
         const endPage =
-            upperPage <= pageData["totalPages"]
+            upperPage <= pageData["totalPages"] - 1
                 ? upperPage
-                : pageData["totalPages"]
-
-        const pageButtons = Array.from(
+                : pageData["totalPages"] - 1
+        const loopArray = Array.from(
             { length: endPage - startPage + 1 },
             (_, i) => startPage + i
-        ).map((p, index) => {
+        )
+
+
+        const pageButtons = loopArray.map((p, index) => {
             return (
                 <li className="nav-item">
                     <button
@@ -61,22 +66,25 @@ function Page({
                         key={index}
                         onClick={handleChangePage}
                     >
-                        {p}
+                        {p + 1}
                     </button>
                 </li>
             )
         })
 
+
         return (
             <React.Fragment>
-                <nav className="navbar navbar-expand-lg navbar-dark bg-dark">{pageButtons}</nav>
+                <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+                    {pageButtons}
+                </nav>
             </React.Fragment>
         )
     }
 
     // render
     return (
-        <div> 
+        <div>
             {/* items list */}
             <div className="container" style={{ width: "100%" }}>
                 <div className="row">{itemList(itemsData)}</div>
