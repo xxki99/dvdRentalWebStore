@@ -11,7 +11,7 @@ function ActorItem({item}) {
             <img className="actor-image" src="#" alt="actor image" />
             <div className="card-body">
                 <h5 className="card-title">{actorName}</h5>
-                <p className="card-text">Actor Info here</p>
+                <p className="card-text">{item["filmsSubsetTitle"].toString()}</p>
                 <a href="#" className="btn btn-primary">Go somewhere</a>
             </div>
         </div>
