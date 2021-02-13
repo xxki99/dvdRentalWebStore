@@ -5,11 +5,6 @@ import ActorsPage from "./actors"
 
 
 
-// import bootstrap
-
-
-
-
 
 function App() {
 
