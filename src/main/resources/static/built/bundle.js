@@ -474,7 +474,7 @@ function Page(_ref) {
       fetchFunction = _ref.fetchFunction,
       handleErrorFunction = _ref.handleErrorFunction,
       _ref$nPage = _ref.nPage,
-      nPage = _ref$nPage === void 0 ? 3 : _ref$nPage;
+      nPage = _ref$nPage === void 0 ? 2 : _ref$nPage;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState, 2),
@@ -491,25 +491,27 @@ function Page(_ref) {
       linkData = _useState6[0],
       setLinkData = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(20),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(10),
       _useState8 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState7, 2),
       size = _useState8[0],
       setSize = _useState8[1];
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(1),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
       _useState10 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState9, 2),
       page = _useState10[0],
       setPage = _useState10[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    fetchIPageData();
+  }, [size, page]);
+
+  var fetchIPageData = function fetchIPageData() {
     fetchFunction(size, page).then(function (data) {
       setItemsData(data["data"]);
       setPageData(data["page"]);
       setLinkData(data["links"]);
-    })["catch"](function (error) {
-      handleErrorFunction(error);
     });
-  }, [size, page]);
+  };
 
   var handleChangePage = function handleChangePage(e) {
     console.log("change page");
@@ -530,14 +532,16 @@ function Page(_ref) {
 
   var pageBar = function pageBar() {
     var lowerPage = pageData["number"] - nPage;
-    var startPage = lowerPage >= 1 ? lowerPage : 1;
+    var startPage = lowerPage >= 0 ? lowerPage : 0;
     var upperPage = pageData["number"] + nPage;
-    var endPage = upperPage <= pageData["totalPages"] ? upperPage : pageData["totalPages"];
-    var pageButtons = Array.from({
+    var lastPage = pageData["totalPages"];
+    var endPage = upperPage <= pageData["totalPages"] - 1 ? upperPage : pageData["totalPages"] - 1;
+    var loopArray = Array.from({
       length: endPage - startPage + 1
     }, function (_, i) {
       return startPage + i;
-    }).map(function (p, index) {
+    });
+    var pageButtons = loopArray.map(function (p, index) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("li", {
         className: "nav-item"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", {
@@ -545,7 +549,7 @@ function Page(_ref) {
         value: p,
         key: index,
         onClick: handleChangePage
-      }, p));
+      }, p + 1));
     });
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("nav", {
       className: "navbar navbar-expand-lg navbar-dark bg-dark"
@@ -601,7 +605,7 @@ function ActorItem(_ref) {
     className: "card-title"
   }, actorName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
     className: "card-text"
-  }, "Actor Info here"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+  }, item["filmsSubsetTitle"].toString()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
     href: "#",
     className: "btn btn-primary"
   }, "Go somewhere")));
@@ -638,7 +642,7 @@ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 
 
- // import bootstrap
+
 
 function App() {
   // render
