@@ -1,10 +1,13 @@
 package com.dvdrental.webStore.Entities;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -14,7 +17,7 @@ public class Film {
     @Id
     @GeneratedValue
     @Column(name="film_id")
-    private Long filmId;
+    private Integer filmId;
 
     @Column(name="title")
     private String title;
@@ -34,10 +37,10 @@ public class Film {
     private Language language;
 
     @Column(name="rental_duration")
-    private String rentalDuration;
+    private Integer rentalDuration;
 
     @Column(name="length")
-    private String length;
+    private Integer length;
 
     @Column(name="replacementCost")
     private float replacementCost;
@@ -50,6 +53,9 @@ public class Film {
 
     @Column(name="fulltext")
     private String fulltext;
+
+    @ManyToMany(mappedBy = "films")
+    private Set<Actor>  actor;
 
 
     public float getReplacementCost() {
@@ -90,12 +96,8 @@ public class Film {
 
     
 
-    public Long getFilmId() {
+    public Integer getFilmId() {
 		return this.filmId;
-	}
-
-	public void setFilmId(Long filmId) {
-		this.filmId = filmId;
 	}
 
     public String getTitle() {
@@ -130,19 +132,19 @@ public class Film {
         this.language = language;
     }
 
-    public String getRentalDuration() {
+    public Integer getRentalDuration() {
         return this.rentalDuration;
     }
 
-    public void setRentalDuration(String rentalDuration) {
+    public void setRentalDuration(Integer rentalDuration) {
         this.rentalDuration = rentalDuration;
     }
 
-    public String getLength() {
+    public Integer getLength() {
         return this.length;
     }
 
-    public void setLength(String length) {
+    public void setLength(Integer length) {
         this.length = length;
     }
 
