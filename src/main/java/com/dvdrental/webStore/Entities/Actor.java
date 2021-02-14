@@ -56,18 +56,12 @@ public class Actor {
 
     @JsonIgnore
     public String[] getFilmsSubsetTitle() {
-        int sizeUpper = 5;
+        int sizeUpper = 3;
         boolean isExtra = (films.size() > sizeUpper);
         int size = isExtra ? sizeUpper + 1 : films.size();
         String[] returnValue = new String[size];
         for (int i = 0; i < size; i++) {
-            if (isExtra && i == size - 1) {
-
-                returnValue[i] = "...";
-            } else {
-
-                returnValue[i] = this.films.get(i).getTitle();
-            }
+            returnValue[i] = this.films.get(i).getTitle();
         }
         return returnValue;
     }

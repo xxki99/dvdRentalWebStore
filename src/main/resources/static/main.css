@@ -1,0 +1,19 @@
+body {
+    background-color: #212121;
+}
+
+.card {
+    background-color: #424242;
+    color: #ffffff;
+}
+
+.card-listItem{
+    max-width: 330px;
+}
+
+.hideOverflow
+{
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}

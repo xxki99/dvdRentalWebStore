@@ -11,9 +11,13 @@ function App() {
     // render
     return (
         <div>
+            
             <ActorsPage />
         </div>
     )
 }
+
+
+
 
 ReactDOM.render(<App />, document.getElementById("react"))

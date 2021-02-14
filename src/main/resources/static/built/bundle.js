@@ -473,6 +473,8 @@ function Page(_ref) {
   var ItemComponent = _ref.ItemComponent,
       fetchFunction = _ref.fetchFunction,
       handleErrorFunction = _ref.handleErrorFunction,
+      _ref$nItemPerPage = _ref.nItemPerPage,
+      nItemPerPage = _ref$nItemPerPage === void 0 ? 12 : _ref$nItemPerPage,
       _ref$nPage = _ref.nPage,
       nPage = _ref$nPage === void 0 ? 2 : _ref$nPage;
 
@@ -491,7 +493,7 @@ function Page(_ref) {
       linkData = _useState6[0],
       setLinkData = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(10),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(nItemPerPage),
       _useState8 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState7, 2),
       size = _useState8[0],
       setSize = _useState8[1];
@@ -516,12 +518,14 @@ function Page(_ref) {
   var handleChangePage = function handleChangePage(e) {
     console.log("change page");
     setPage(e.target.value);
+    e.target.blur();
+    scroll(0, 0);
   };
 
   var itemList = function itemList(items) {
     var list = items.map(function (item, index) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
-        className: "col-3",
+        className: "col card-listItem",
         key: index
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(ItemComponent, {
         item: item
@@ -535,33 +539,52 @@ function Page(_ref) {
     var startPage = lowerPage >= 0 ? lowerPage : 0;
     var upperPage = pageData["number"] + nPage;
     var lastPage = pageData["totalPages"];
-    var endPage = upperPage <= pageData["totalPages"] - 1 ? upperPage : pageData["totalPages"] - 1;
+    var endPage = upperPage <= lastPage - 1 ? upperPage : lastPage - 1;
     var loopArray = Array.from({
       length: endPage - startPage + 1
     }, function (_, i) {
       return startPage + i;
     });
-    var pageButtons = loopArray.map(function (p, index) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("li", {
-        className: "nav-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", {
-        className: "btn btn-outline-light",
+
+    var pageButton = function pageButton(p) {
+      var isDisabled = p === pageData["number"] ? "disabled" : " ";
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", {
+        className: "btn btn-outline-light me-1 btn-block ".concat(isDisabled),
         value: p,
-        key: index,
         onClick: handleChangePage
-      }, p + 1));
+      }, p + 1);
+    };
+
+    var pageButtons = loopArray.map(function (p, index) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        key: index
+      }, pageButton(p));
     });
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("nav", {
-      className: "navbar navbar-expand-lg navbar-dark bg-dark"
-    }, pageButtons));
+
+    var pageButtonNavBar = function pageButtonNavBar() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, startPage !== 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "d-flex"
+      }, pageButton(0), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "ms-2 me-2"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", {
+        className: "text-light"
+      }, "..."))), pageButtons, endPage !== lastPage - 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "d-flex"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "ms-2 me-2"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", {
+        className: "text-light"
+      }, "...")), pageButton(lastPage - 1)));
+    };
+
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+      className: "d-flex justify-content-center"
+    }, pageButtonNavBar()));
   }; // render
 
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
-    className: "container",
-    style: {
-      width: "100%"
-    }
+    className: "container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
     className: "row"
   }, itemList(itemsData))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, pageBar()));
@@ -594,21 +617,27 @@ function ActorItem(_ref) {
   var item = _ref.item;
   var actorName = "".concat(item["firstName"], " ").concat(item["lastName"]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "card mb-3"
+    className: "card mb-3 "
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
     className: "actor-image",
-    src: "#",
+    src: "https://cdn.pixabay.com/photo/2015/10/31/12/00/question-1015308_960_720.jpg",
     alt: "actor image"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "mb-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", {
-    className: "card-title"
-  }, actorName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-    className: "card-text"
-  }, item["filmsSubsetTitle"].toString()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    className: "card-title hideOverflow"
+  }, actorName)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "mb-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+    className: "card-text hideOverflow mh-25"
+  }, item["filmsSubsetTitle"].join(", "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "d-flex justify-content-end"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
     href: "#",
-    className: "btn btn-primary"
-  }, "Go somewhere")));
+    className: "btn btn-outline-light"
+  }, "Details"))));
 }
 
 function ActorsPage() {
