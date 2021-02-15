@@ -6,7 +6,7 @@ module.exports = {
     cache: true,
     mode: "development",
     output: {
-        path: __dirname,
+        path: __dirname, 
         filename: "./src/main/resources/static/built/bundle.js",
     },
     module: {
