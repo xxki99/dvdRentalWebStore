@@ -19,7 +19,7 @@ async function fetchData(url){
 
 
 
-async function nav(url, searchPatten, qs=undefined){
+async function nav(url, searchPatten, qs=undefined, id = undefined){
     var tmpUrl = url
     for (let word of searchPatten) {
         const tmpData = await fetchData(tmpUrl)
@@ -50,6 +50,9 @@ async function nav(url, searchPatten, qs=undefined){
     };
 
     // console.log(tmpUrl)
+    if (id !== undefined){
+        tmpUrl = `${tmpUrl}/${id}`
+    }
     const returnValue = await fetchData(tmpUrl)
     return {
             data: returnValue["_embedded"][searchPatten[searchPatten.length - 1]], 

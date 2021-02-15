@@ -21,8 +21,13 @@ body {
 }
 
 .card-listItem{
-    max-width: 330px;
+    max-width: 280px;
 }
+
+.cardButton{
+    cursor: pointer;
+}
+
 
 .hideOverflow
 {

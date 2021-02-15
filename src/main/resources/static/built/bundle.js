@@ -379,6 +379,7 @@ function nav(_x2, _x3) {
 function _nav() {
   _nav = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(url, searchPatten) {
     var qs,
+        id,
         tmpUrl,
         _iterator,
         _step,
@@ -395,34 +396,35 @@ function _nav() {
         switch (_context2.prev = _context2.next) {
           case 0:
             qs = _args2.length > 2 && _args2[2] !== undefined ? _args2[2] : undefined;
+            id = _args2.length > 3 && _args2[3] !== undefined ? _args2[3] : undefined;
             tmpUrl = url;
             _iterator = _createForOfIteratorHelper(searchPatten);
-            _context2.prev = 3;
+            _context2.prev = 4;
 
             _iterator.s();
 
-          case 5:
+          case 6:
             if ((_step = _iterator.n()).done) {
-              _context2.next = 25;
+              _context2.next = 26;
               break;
             }
 
             word = _step.value;
-            _context2.next = 9;
+            _context2.next = 10;
             return fetchData(tmpUrl);
 
-          case 9:
+          case 10:
             tmpData = _context2.sent;
 
             if (!("_links" in tmpData)) {
-              _context2.next = 22;
+              _context2.next = 23;
               break;
             }
 
             tmpLinks = tmpData["_links"];
 
             if (!(word in tmpLinks)) {
-              _context2.next = 19;
+              _context2.next = 20;
               break;
             }
 
@@ -438,47 +440,51 @@ function _nav() {
             }
 
             tmpUrl = nextUrl;
-            _context2.next = 20;
+            _context2.next = 21;
             break;
-
-          case 19:
-            throw new Error("Not found: ".concat(word));
 
           case 20:
-            _context2.next = 23;
-            break;
+            throw new Error("Not found: ".concat(word));
 
-          case 22:
-            throw new Error("Not found _links: ".concat(word));
+          case 21:
+            _context2.next = 24;
+            break;
 
           case 23:
-            _context2.next = 5;
+            throw new Error("Not found _links: ".concat(word));
+
+          case 24:
+            _context2.next = 6;
             break;
 
-          case 25:
-            _context2.next = 30;
+          case 26:
+            _context2.next = 31;
             break;
 
-          case 27:
-            _context2.prev = 27;
-            _context2.t0 = _context2["catch"](3);
+          case 28:
+            _context2.prev = 28;
+            _context2.t0 = _context2["catch"](4);
 
             _iterator.e(_context2.t0);
 
-          case 30:
-            _context2.prev = 30;
+          case 31:
+            _context2.prev = 31;
 
             _iterator.f();
 
-            return _context2.finish(30);
+            return _context2.finish(31);
 
-          case 33:
+          case 34:
             ; // console.log(tmpUrl)
 
-            _context2.next = 36;
+            if (id !== undefined) {
+              tmpUrl = "".concat(tmpUrl, "/").concat(id);
+            }
+
+            _context2.next = 38;
             return fetchData(tmpUrl);
 
-          case 36:
+          case 38:
             returnValue = _context2.sent;
             return _context2.abrupt("return", {
               data: returnValue["_embedded"][searchPatten[searchPatten.length - 1]],
@@ -486,12 +492,12 @@ function _nav() {
               links: returnValue["_links"]
             });
 
-          case 38:
+          case 40:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[3, 27, 30, 33]]);
+    }, _callee2, null, [[4, 28, 31, 34]]);
   }));
   return _nav.apply(this, arguments);
 }
@@ -509,7 +515,9 @@ function _nav() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "getAllActors": () => (/* binding */ getAllActors)
+/* harmony export */   "getAllActors": () => (/* binding */ getAllActors),
+/* harmony export */   "getAllFilms": () => (/* binding */ getAllFilms),
+/* harmony export */   "getFilmDetail": () => (/* binding */ getFilmDetail)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
@@ -548,6 +556,61 @@ function _getAllActors() {
     }, _callee);
   }));
   return _getAllActors.apply(this, arguments);
+}
+
+function getAllFilms(_x3, _x4) {
+  return _getAllFilms.apply(this, arguments);
+}
+
+function _getAllFilms() {
+  _getAllFilms = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(size, page) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.next = 2;
+            return (0,_hal__WEBPACK_IMPORTED_MODULE_2__.nav)(root, ["films"], {
+              size: size,
+              page: page
+            });
+
+          case 2:
+            return _context2.abrupt("return", _context2.sent);
+
+          case 3:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+  return _getAllFilms.apply(this, arguments);
+}
+
+function getFilmDetail(_x5) {
+  return _getFilmDetail.apply(this, arguments);
+}
+
+function _getFilmDetail() {
+  _getFilmDetail = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(id) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.next = 2;
+            return (0,_hal__WEBPACK_IMPORTED_MODULE_2__.nav)(root, ["films"], id = id);
+
+          case 2:
+            return _context3.abrupt("return", _context3.sent);
+
+          case 3:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+  return _getFilmDetail.apply(this, arguments);
 }
 
 
@@ -696,6 +759,52 @@ function Page(_ref) {
 
 /***/ }),
 
+/***/ "./src/main/js/PageItem.js":
+/*!*********************************!*\
+  !*** ./src/main/js/PageItem.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PageItem": () => (/* binding */ PageItem)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+function PageItem(_ref) {
+  var title = _ref.title,
+      content = _ref.content,
+      action = _ref.action,
+      image = _ref.image,
+      onClick = _ref.onClick;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card mb-3 cardButton",
+    onClick: onClick
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+    className: "card-image",
+    src: image,
+    alt: "card image"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "mb-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", {
+    className: "card-title hideOverflow"
+  }, title)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "mb-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+    className: "card-text hideOverflow mh-25"
+  }, content)), action !== undefined && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "d-flex justify-content-end"
+  }, action)));
+}
+
+
+
+/***/ }),
+
 /***/ "./src/main/js/actors.js":
 /*!*******************************!*\
   !*** ./src/main/js/actors.js ***!
@@ -710,36 +819,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _DVDRentalStoreAPI_storeAPI__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DVDRentalStoreAPI/storeAPI */ "./src/main/js/DVDRentalStoreAPI/storeAPI.js");
 /* harmony import */ var _Page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Page */ "./src/main/js/Page.js");
+/* harmony import */ var _PageItem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./PageItem */ "./src/main/js/PageItem.js");
 
 
 
-var root = "/api";
+
 
 function ActorItem(_ref) {
   var item = _ref.item;
   var actorName = "".concat(item["firstName"], " ").concat(item["lastName"]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "card mb-3 "
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-    className: "actor-image",
-    src: "https://cdn.pixabay.com/photo/2015/10/31/12/00/question-1015308_960_720.jpg",
-    alt: "actor image"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "card-body"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "mb-3"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", {
-    className: "card-title hideOverflow"
-  }, actorName)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "mb-3"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-    className: "card-text hideOverflow mh-25"
-  }, item["filmsSubsetTitle"].join(", "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "d-flex justify-content-end"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    href: "#",
-    className: "btn btn-outline-light"
-  }, "Details"))));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_PageItem__WEBPACK_IMPORTED_MODULE_3__.PageItem, {
+    title: actorName,
+    content: item["filmsSubsetTitle"].join(", "),
+    image: "https://cdn.pixabay.com/photo/2015/10/31/12/00/question-1015308_960_720.jpg"
+  });
 }
 
 function ActorsPage() {
@@ -768,8 +861,9 @@ function ActorsPage() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _actors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./actors */ "./src/main/js/actors.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _films__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./films */ "./src/main/js/films.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
@@ -778,13 +872,16 @@ var ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/in
 
 
 
+
 function App() {
   // render
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(NavBar, null), /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.BrowserRouter, null, /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Switch, null, /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Route, {
-    path: "/"
-  }, /*#__PURE__*/React.createElement(_actors__WEBPACK_IMPORTED_MODULE_1__.default, null)), /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Route, {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.BrowserRouter, null, /*#__PURE__*/React.createElement(NavBar, null), /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Switch, null, /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {
     path: "/actors"
-  }, /*#__PURE__*/React.createElement(_actors__WEBPACK_IMPORTED_MODULE_1__.default, null)))));
+  }, /*#__PURE__*/React.createElement(_actors__WEBPACK_IMPORTED_MODULE_1__.default, null)), /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {
+    path: "/films/:id"
+  }, /*#__PURE__*/React.createElement(_films__WEBPACK_IMPORTED_MODULE_2__.FilmDetail, null)), /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {
+    path: "/films"
+  }, /*#__PURE__*/React.createElement(_films__WEBPACK_IMPORTED_MODULE_2__.FilmsPage, null)))));
 }
 
 function NavBar() {
@@ -796,11 +893,92 @@ function NavBar() {
     className: "nav-item"
   }, /*#__PURE__*/React.createElement("a", {
     className: "nav-link text-white",
-    href: "#"
-  }, "Actor"))));
+    href: "/actors"
+  }, "Actor")), /*#__PURE__*/React.createElement("li", {
+    className: "nav-item"
+  }, /*#__PURE__*/React.createElement("a", {
+    className: "nav-link text-white",
+    href: "/films"
+  }, "Films"))));
 }
 
 ReactDOM.render( /*#__PURE__*/React.createElement(App, null), document.getElementById("react"));
+
+/***/ }),
+
+/***/ "./src/main/js/films.js":
+/*!******************************!*\
+  !*** ./src/main/js/films.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FilmsPage": () => (/* binding */ FilmsPage),
+/* harmony export */   "FilmDetail": () => (/* binding */ FilmDetail)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _Page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Page */ "./src/main/js/Page.js");
+/* harmony import */ var _PageItem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./PageItem */ "./src/main/js/PageItem.js");
+/* harmony import */ var _DVDRentalStoreAPI_storeAPI__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DVDRentalStoreAPI/storeAPI */ "./src/main/js/DVDRentalStoreAPI/storeAPI.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+
+
+
+
+
+
+
+function FilmsItem(_ref) {
+  var item = _ref.item;
+
+  var handleClick = function handleClick() {
+    console.log(item["title"]);
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_PageItem__WEBPACK_IMPORTED_MODULE_3__.PageItem, {
+    title: item.title,
+    content: item["filmsActorsName"].join(", "),
+    onClick: handleClick,
+    image: "https://cdn.pixabay.com/photo/2017/06/08/17/32/not-found-2384304_960_720.jpg"
+  });
+}
+
+function FilmDetail() {
+  var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useParams)(),
+      id = _useParams.id;
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState, 2),
+      filmDetailData = _useState2[0],
+      setFilmDetailData = _useState2[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    (0,_DVDRentalStoreAPI_storeAPI__WEBPACK_IMPORTED_MODULE_4__.getFilmDetail)(id).then(function (data) {
+      setFilmDetailData(data);
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  }, [id]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, id);
+}
+
+function FilmsPage() {
+  var handleError = function handleError(error) {
+    console.log(error);
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_Page__WEBPACK_IMPORTED_MODULE_2__.Page, {
+    ItemComponent: FilmsItem,
+    fetchFunction: _DVDRentalStoreAPI_storeAPI__WEBPACK_IMPORTED_MODULE_4__.getAllFilms,
+    handleErrorFunction: handleError
+  }));
+}
+
+
 
 /***/ }),
 
