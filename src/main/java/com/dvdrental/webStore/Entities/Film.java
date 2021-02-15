@@ -1,6 +1,6 @@
 package com.dvdrental.webStore.Entities;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="film")
@@ -55,7 +57,7 @@ public class Film {
     private String fulltext;
 
     @ManyToMany(mappedBy = "films")
-    private Set<Actor>  actor;
+    private List<Actor>  actors;
 
 
     public float getReplacementCost() {
@@ -146,6 +148,18 @@ public class Film {
 
     public void setLength(Integer length) {
         this.length = length;
+    }
+
+    @JsonIgnore
+    public String[] getFilmsActorsName(){
+
+        int size = (this.actors.size() <= 3)? this.actors.size() : 3;
+        String[] returnValue = new String[size];
+        for (int i = 0; i < size; i++){
+            returnValue[i] = this.actors.get(i).getFullName();
+
+        }
+        return returnValue;
     }
 
 }
