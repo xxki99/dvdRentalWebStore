@@ -9,6 +9,7 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
 
+        // register view for frontend react router, not sure how to register all path except for /api, will be changed
         registry.addViewController("/").setViewName("forward:/");
         registry.addViewController("/actors").setViewName("forward:/");
     }
