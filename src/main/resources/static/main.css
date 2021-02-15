@@ -1,10 +1,23 @@
 body {
+    color: #ffffff;
     background-color: #212121;
+}
+
+.customNavBar{
+    height: 42px;
+}
+
+.text-primary{
+    color: #ffffff;
 }
 
 .card {
     background-color: #424242;
     color: #ffffff;
+}
+
+.fullLength{
+    width: 100%;
 }
 
 .card-listItem{
