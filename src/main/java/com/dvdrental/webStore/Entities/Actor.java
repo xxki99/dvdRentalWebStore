@@ -66,4 +66,9 @@ public class Actor {
         return returnValue;
     }
 
+    @JsonIgnore
+    public String getFullName(){
+        return String.format("%s %s", this.firstName, this.lastName);
+    }
+
 }
